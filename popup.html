@@ -4,29 +4,119 @@
     <style>
       body {
         width: 300px;
-        padding: 10px;
+        padding: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        margin: 0;
+        background: #f8f9fa;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
       }
+
       #input-text {
         width: 100%;
-        margin-bottom: 10px;
-        padding: 5px;
+        margin-bottom: 12px;
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: border-color 0.2s, box-shadow 0.2s;
       }
+
+      #input-text:focus {
+        outline: none;
+        border-color: #4dabf7;
+        box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.2);
+      }
+
+      .button-container {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      button {
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      #paste-btn {
+        background: #e9ecef;
+        color: #495057;
+      }
+
+      #paste-btn:hover {
+        background: #dee2e6;
+      }
+
       #submit-btn {
-        width: 100%;
-        padding: 5px;
+        flex-grow: 1;
+        background: #228be6;
+        color: white;
       }
+
+      #submit-btn:hover {
+        background: #1c7ed6;
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+
       .checkbox-container {
-        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        color: #495057;
+        font-size: 14px;
+      }
+
+      input[type='checkbox'] {
+        width: 16px;
+        height: 16px;
+        accent-color: #228be6;
+        cursor: pointer;
+      }
+
+      label {
+        cursor: pointer;
+        user-select: none;
       }
     </style>
   </head>
   <body>
-    <input type="text" id="input-text" placeholder="Enter your text" />
+    <input type="text" id="input-text" placeholder="JSON Goes Here..." />
+    <div class="button-container">
+      <button id="paste-btn">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+          ></path>
+          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+        </svg>
+      </button>
+      <button id="submit-btn">Insert</button>
+    </div>
     <div class="checkbox-container">
       <input type="checkbox" id="fill-max-tokens" checked />
       <label for="fill-max-tokens">Fill max tokens</label>
     </div>
-    <button id="submit-btn">Insert Text</button>
     <script src="popup.js"></script>
   </body>
 </html>

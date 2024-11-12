@@ -3,7 +3,7 @@
   "version": "1.0",
   "manifest_version": 3,
   "description": "Helps insert text into OpenAI playground divs",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "clipboardRead"],
   "host_permissions": ["https://platform.openai.com/*"],
   "action": {
     "default_popup": "popup.html"

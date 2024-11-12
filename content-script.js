@@ -119,6 +119,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         console.error('[LLM_CONSOLE_AUTIOFILL] User prompt input not found');
       }
 
+      const currentUrl = window.location.href;
+
+      const urlParams = new URLSearchParams(new URL(currentUrl).search);
+      const urlModel = urlParams.get('model');
+
+      if (urlModel && urlModel !== model) {
+        alert(
+          `Please change the model to ${model}. Current model is ${urlModel}.`
+        );
+      }
+
       console.log('[LLM_CONSOLE_AUTIOFILL] execution complete');
     }, 300); // 300ms should cover most animation durations
   } else {
