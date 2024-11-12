@@ -1,0 +1,17 @@
+{
+  "name": "OpenAI Playground Helper",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Helps insert text into OpenAI playground divs",
+  "permissions": ["activeTab"],
+  "host_permissions": ["https://platform.openai.com/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://platform.openai.com/playground/*"],
+      "js": ["content-script.js"]
+    }
+  ]
+}
