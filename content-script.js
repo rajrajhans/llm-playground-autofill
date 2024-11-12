@@ -3,13 +3,12 @@ console.log('Content script loaded');
 
 // Listen for messages from the popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  const { text } = request;
+  const { text, shouldFillMaxTokens } = request;
 
   const systemPrompt = 'System goes here';
   const temperature = 0.69;
   const maxTokens = 1069;
   const userPrompt = text;
-  const shouldFillMaxTokens = true;
 
   const systemInstructionsHeading = Array.from(
     document.getElementsByTagName('h3')
@@ -17,9 +16,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   if (systemInstructionsHeading) {
     systemInstructionsHeading.click();
-    // Wait for animation to complete and textarea to be visible
+    // wait for animation to complete and textarea to be visible
     setTimeout(() => {
-      // Find the textarea by its placeholder text
+      // find the textarea by its placeholder text
       const textareas = document.getElementsByTagName('textarea');
 
       const textarea = Array.from(textareas).find(

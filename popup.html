@@ -15,10 +15,17 @@
         width: 100%;
         padding: 5px;
       }
+      .checkbox-container {
+        margin-bottom: 10px;
+      }
     </style>
   </head>
   <body>
     <input type="text" id="input-text" placeholder="Enter your text" />
+    <div class="checkbox-container">
+      <input type="checkbox" id="fill-max-tokens" checked />
+      <label for="fill-max-tokens">Fill max tokens</label>
+    </div>
     <button id="submit-btn">Insert Text</button>
     <script src="popup.js"></script>
   </body>
