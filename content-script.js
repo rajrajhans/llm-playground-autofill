@@ -5,10 +5,13 @@ console.log('Content script loaded');
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   const { text, shouldFillMaxTokens } = request;
 
-  const systemPrompt = 'System goes here';
-  const temperature = 0.69;
-  const maxTokens = 1069;
-  const userPrompt = text;
+  const data = JSON.parse(text);
+
+  const systemPrompt = data.system;
+  const temperature = data.temperature;
+  const maxTokens = data.max_tokens;
+  const userPrompt = data.user;
+  const model = data.model;
 
   const systemInstructionsHeading = Array.from(
     document.getElementsByTagName('h3')
