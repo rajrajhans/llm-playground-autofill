@@ -7,8 +7,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   const systemPrompt = 'System goes here';
   const temperature = 0.69;
-  const maxTokens = 1000;
+  const maxTokens = 1069;
   const userPrompt = text;
+  const shouldFillMaxTokens = true;
 
   const systemInstructionsHeading = Array.from(
     document.getElementsByTagName('h3')
@@ -64,6 +65,42 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
       } else {
         console.error('[LLM_CONSOLE_AUTIOFILL]Temperature label not found');
+      }
+
+      if (shouldFillMaxTokens) {
+        const maxLengthLabel = Array.from(
+          document.getElementsByTagName('span')
+        ).find((span) => span.textContent === 'Maximum length');
+
+        if (maxLengthLabel) {
+          let container = maxLengthLabel;
+          while (container && !container.querySelector('input')) {
+            container = container.parentElement;
+          }
+
+          if (container) {
+            const input = container.querySelector('input');
+            if (input) {
+              input.value = maxTokens;
+              input.dispatchEvent(new Event('input', { bubbles: true }));
+
+              const sliderContainer = container.nextElementSibling;
+              if (sliderContainer) {
+                const slider = sliderContainer.querySelector('[role="slider"]');
+                if (slider) {
+                  slider.setAttribute('aria-valuenow', maxTokens);
+                  slider.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+              }
+            } else {
+              console.error(
+                '[LLM_CONSOLE_AUTIOFILL] Max tokens input not found'
+              );
+            }
+          }
+        } else {
+          console.error('[LLM_CONSOLE_AUTIOFILL] Max length label not found');
+        }
       }
 
       console.log('[LLM_CONSOLE_AUTIOFILL] execution complete');
