@@ -103,6 +103,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
       }
 
+      const userPromptElement = Array.from(
+        document.getElementsByTagName('p')
+      ).find(
+        (p) => p.getAttribute('data-placeholder') === 'Enter user message...'
+      );
+
+      if (userPromptElement) {
+        userPromptElement.textContent = userPrompt;
+        userPromptElement.classList.remove('is-empty', 'is-editor-empty');
+        userPromptElement.dispatchEvent(new Event('input', { bubbles: true }));
+      } else {
+        console.error('[LLM_CONSOLE_AUTIOFILL] User prompt input not found');
+      }
+
       console.log('[LLM_CONSOLE_AUTIOFILL] execution complete');
     }, 300); // 300ms should cover most animation durations
   } else {
