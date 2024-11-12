@@ -1,3 +1,12 @@
+document.getElementById('paste-btn').addEventListener('click', async () => {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById('input-text').value = text;
+  } catch (error) {
+    console.error('[LLM_CONSOLE_AUTOFILL] Clipboard error:', error);
+  }
+});
+
 document.getElementById('submit-btn').addEventListener('click', async () => {
   const text = document.getElementById('input-text').value;
   const shouldFillMaxTokens =
